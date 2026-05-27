@@ -10,7 +10,7 @@ type Props = {
 export const Dropdown: React.FC<Props> = ({
   people,
   onSelect,
-  debounceDelay = 1000,
+  debounceDelay = 300,
 }) => {
   const [query, setQuery] = React.useState('');
   const [debouncedQuery, setDebouncedQuery] = React.useState('');
@@ -18,6 +18,12 @@ export const Dropdown: React.FC<Props> = ({
 
   React.useEffect(() => {
     const handler = setTimeout(() => {
+      if (query.trim() === '') {
+        setDebouncedQuery('');
+
+        return;
+      }
+
       setDebouncedQuery(query);
     }, debounceDelay);
 
@@ -42,7 +48,7 @@ export const Dropdown: React.FC<Props> = ({
   function handleSelect(person: Person) {
     onSelect(person);
     setIsDropdownActive(false);
-    setQuery('');
+    setQuery(person.name);
   }
 
   React.useEffect(() => {
