@@ -95,7 +95,7 @@ export const Dropdown: React.FC<Props> = ({
                 <div
                   className="dropdown-item"
                   data-cy="suggestion-item"
-                  key={person.name}
+                  key={person.slug}
                   onClick={() => handleSelect(person)}
                 >
                   <p className="has-text-link">{person.name}</p>
